@@ -1,0 +1,20 @@
+use redeFastfood
+
+db.produtos.insertOne({ nome: "Hambúrguer", preco : 35, quantidade: 220})
+db.produtos.insertOne({ nome: "Batata frita", preco : 10, quantidade: 300})
+db.produtos.insertOne({ nome: "Refrigerante", preco : 9, quantidade: 450})
+
+db.clientes.insertOne({ nome: "Ana", idade: 18})
+db.clientes.insertOne({ nome: "Victor", idade: 22})
+db.clientes.insertOne({ nome: "Beatriz", idade: 45})
+
+db.produtos.find()
+db.clientes.find()
+
+mongodump -d redeFastfood -o redeFastfood
+
+db.dropDatabase()
+
+mongorestore redeFastfood
+
+db.dropDatabase()
