@@ -1,0 +1,70 @@
+//Criando Banco de Dados
+use CleanFast
+
+//Criando collection Cliente
+db.Cliente.insertOne ({id: 1, nome: "Gustavo", Telefone: 11944688908, ClienteAtivo: true, Servicosjautilizados: "Passadoria" })
+db.Cliente.insertOne ({id: 2, nome: "Carlos", Telefone: 11984111908, ClienteAtivo: false, Servicosjautilizados: "Passadoria" })
+
+//Mostrando collection
+db.Cliente.find()
+
+Criando segunda collection com Array
+db.Pedidos.insertOne({id: 01, numeroPedido: 01, Servicos: ["Secagem", "Passadoria"], StatusPedidos: "Andamento"})
+db.Pedidos.insertOne({id: 02, numeroPedido: 02, Servicos: ["Lavagem", "Passadoria"], StatusPedidos: "Finalizado"})
+db.Pedidos.insertOne({id: 03, numeroPedido: 03, Servicos: ["Lavagem", "Secagem"], StatusPedidos: "Andamento"})
+db.Pedidos.insertOne({id: 04, numeroPedido: 04, Servicos: ["Lavagem", "Secagem"], StatusPedidos: "Andamento"})
+db.Pedidos.insertOne({id: 05, numeroPedido: 05, Servicos: ["Secagem", "Passadoria"], StatusPedidos: "Andamento"})
+db.Pedidos.insertOne({id: 06, numeroPedido: 06, Servicos: ["Lavagem", "Passadoria"], StatusPedidos: "Finalizado"})
+
+
+//Mostrando collection
+db.Pedidos.find()
+db.Pedidos.find({numeroPedido: 01})
+
+//Atualizando Status de Pedidos
+db.Pedidos.updateOne({id: 01,}, {$set: {StatusPedidos: "Finalizado"}})
+
+//Atualização em massa de pedidos em Andamento para Finalizado
+db.Pedidos.updateMany({StatusPedidos: "Andamento"}, {$set: {StatusPedidos: "Finalizado"}})
+
+//Criando constante
+const Pedidos = db.Pedidos.find()
+
+//
+typeof Pedidos
+typeof Pedidos.StatusPedidos
+typeof Pedidos.Servicos
+
+//exclusao de um documento especifico
+db.Pedidos.deleteOne({Servicos: ["Lavagem", "Secagem"]})
+
+//exclusao de varios documentos
+db.Pedidos.deleteMany({Servicos: ["Lavagem", "Passadoria"]})
+
+
+//Criação de um Usúario
+db.createUser({
+  user: "FuncionarioLavandeiria",
+  pwd: " ",
+  roles: [
+    {role: "readWrite", db: "CleanFast"}
+  ]
+})
+
+//Listar usuário
+db.getUsers()
+
+//Deletando usuário
+db.dropUser("FuncionarioLavandeiria")
+
+//exclusao da collection
+db.Pedidos.drop()
+
+//Excluindo o banco de dados
+db.dropDatabase()
+
+
+
+
+
+db.Pedidos.deleteMany({})
